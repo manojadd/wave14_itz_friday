@@ -34,33 +34,42 @@ export default class Tile extends React.Component{
 				console.log("Error fetching from API");
 			}
 			//this.retreiveObjects();
-			//this.createAutoplayMessages();
+			this.createAutoplayMessages();
 			//this.createCard();
 		})
 	}
 
 	componentWillMount() {
+		this.createDefaultTile();
+	    
+	}
+	componentWillReceiveProps(nextProps) {
 		this.ajaxCall();
 	}
-	
 	// retreiveObjects(){
 	// 	// this.setState({
 	// 	// 	title:this.state.msgList.
 	// 	// })
 	// }
 
-	// createAutoplayMessages(){
-	// 		this.setState({div:<AutoPlaySwipeableViews>
-	// 		                  {this.state.msgList.map((details, i) => (
-	// 		                  	<div key={i}>
-	// 			              <CardHeader title={details.To} subtitle={details.Tag} />
-	// 			              <CardText>
-	// 			            	{details.Body}
-	// 			              </CardText>
-	// 			              </div>
-	// 		                   ))}
-	// 		                  </AutoPlaySwipeableViews>});
-	// }
+	createAutoplayMessages(){
+			this.setState({div:<AutoPlaySwipeableViews>
+			                  {this.state.msgList.map((details, i) => (
+			                  	<div key={i}>
+				              <CardHeader title={details.To} subtitle={details.Tag} />
+				              <CardText >
+				            	{details.Body}
+				              </CardText>
+				              </div>
+			                   ))}
+			                  </AutoPlaySwipeableViews>});
+	}
+
+	createDefaultTile(){
+		this.setState({
+			div:<CardText>Add Tile</CardText>
+		})
+	}
 	render(){
 		//console.log(this.state.msgList+"aaaa");
 		// this.state.msgList.map(function(i){
@@ -69,16 +78,7 @@ export default class Tile extends React.Component{
 		return(
 	
 				<Card style={{height: '100%',overflow:"hidden"}}>
-					<AutoPlaySwipeableViews>
-			                  {this.state.msgList.map((details, i) => (
-			                  	<div key={i+"msg"}>
-				              <CardHeader title={details.To} subtitle={details.Tag} />
-				              <CardText>
-				            	{details.Body}
-				              </CardText>
-				              </div>
-			                   ))}
-			                </AutoPlaySwipeableViews>
+					{this.state.div}
 				</Card>
          
 			);

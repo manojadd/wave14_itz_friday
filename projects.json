@@ -1,0 +1,13 @@
+{
+	"Projects":[
+		{
+			"id":"ItzFriday","channels":[{"Name":"Developers"},{"Name":"UX"},{"Name":"Testing"}]
+		},
+		{
+			"id":"Oxygen","channels":[{"Name":"Developers"},{"Name":"UX"},{"Name":"Testing"},{"Name":"DataBase"}]
+		},
+		{
+			"id":"ContionousIntegration","channels":[{"Name":"Developers"},{"Name":"Testing"}]
+		}
+		]
+}
