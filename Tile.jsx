@@ -5,6 +5,10 @@ import ajax from 'superagent';
 import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import IconButton from 'material-ui/IconButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class Tile extends React.Component{
 	
@@ -39,8 +43,8 @@ export default class Tile extends React.Component{
 		})
 	}
 
-	componentWillMount() {
-		this.createDefaultTile();
+	componentDidMount() {
+		this.ajaxCall();
 	    
 	}
 	componentWillReceiveProps(nextProps) {
@@ -51,25 +55,29 @@ export default class Tile extends React.Component{
 	// 	// 	title:this.state.msgList.
 	// 	// })
 	// }
-
-	createAutoplayMessages(){
-			this.setState({div:<AutoPlaySwipeableViews>
-			                  {this.state.msgList.map((details, i) => (
-			                  	<div key={i}>
-				              <CardHeader title={details.To} subtitle={details.Tag} />
-				              <CardText >
-				            	{details.Body}
-				              </CardText>
-				              </div>
-			                   ))}
-			                  </AutoPlaySwipeableViews>});
+createAutoplayMessages(){
+	if(this.props.tileid==="t1"){
+		this.setState({div:<div><CardHeader title="TITLE ADD" subtitle="click the icon"/>
+        <CardText>
+        <center><FloatingActionButton onTouchTap={this.handleOpen}>
+        <ContentAdd />
+        </FloatingActionButton></center></CardText></div>
+	})
 	}
+	else{
+            this.setState({div:<AutoPlaySwipeableViews>
+                              {this.state.msgList.map((details, i) => (
+                                  <div key={i}>
+                              <CardHeader title={details.To} subtitle={details.Tag} >     <IconButton  ><SettingsIcon  /></IconButton>   </CardHeader>
+                              <CardText >
+                                {details.Body}
+                              </CardText>
+                              </div>
+                               ))}
+                              </AutoPlaySwipeableViews>});
+        }
+    }
 
-	createDefaultTile(){
-		this.setState({
-			div:<CardText>Add Tile</CardText>
-		})
-	}
 	render(){
 		//console.log(this.state.msgList+"aaaa");
 		// this.state.msgList.map(function(i){
