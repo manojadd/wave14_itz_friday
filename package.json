@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently  \"json-server TileConfig.json --port 3001 \" \"json-server Messages.json --port 3000 \" \"webpack-dev-server --hot\"  "
+    "start": "concurrently \"json-server Messages.json --port 3000 --watch \" \"json-server TileConfig.json --port 3001 --watch\"  \"json-server Configured.json --port 3002 --watch\" \"json-server projects.json --port 3003 --watch\" \"webpack-dev-server --hot\"  "
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "style-loader": "^0.13.1",
     "superagent": "^3.3.2",
+    "sync-request": "^4.0.1",
+    "then-request": "^2.2.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },

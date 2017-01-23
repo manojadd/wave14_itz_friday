@@ -1,0 +1,28 @@
+{
+  "Configured": [
+    {
+      "id": "t1",
+      "value": true
+    },
+    {
+      "id": "t2",
+      "value": true
+    },
+    {
+      "id": "t3",
+      "value": true
+    },
+    {
+      "id": "t4",
+      "value": true
+    },
+    {
+      "id": "t5",
+      "value": false
+    },
+    {
+      "id": "t6",
+      "value": false
+    }
+  ]
+}
