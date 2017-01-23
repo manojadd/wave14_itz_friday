@@ -9,6 +9,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 let channelMenu=null;
+
 export default class Popup extends React.Component{
 	constructor(props) {
 		super(props);
@@ -24,7 +25,7 @@ export default class Popup extends React.Component{
 			projectName:""
 
 		}
-		this.handleOpen=this.handleOpen.bind(this);
+		//this.handleOpen=this.handleOpen.bind(this);
 		this.handleClose=this.handleClose.bind(this);
 		//this.handleSecondOpen=this.handleSecondOpen.bind(this);
 		this.handleSecondClose=this.handleSecondClose.bind(this);
@@ -37,20 +38,33 @@ export default class Popup extends React.Component{
 		this.printChannelNames=this.printChannelNames.bind(this);
 		this.putFilterData=this.putFilterData.bind(this);
 	}
-	handleOpen(){
+
+	// componentWillMount() {
+	
+	// 	this.setState({status:true})
+		
+	// }
+
+	componentWillReceiveProps(nextProps) {
+			console.log("inside popup");
 		this.setState({status:true})
 	}
+
 	handleClose(){
 		//console.log("handleClose");
 		this.setState({status:false})
+		
 	}
 	// handleSecondOpen(){
 	// 	this.setState({filterstatus:true})
 	// }
+
 	handleSecondClose(){
 		//console.log("handleClose");
 		this.setState({filterstatus:false})
+		this.setState({status:false})
 	}
+
 	handleChange(e,index,filtertype){
 		
 		this.setState({filtertype})
@@ -86,7 +100,7 @@ export default class Popup extends React.Component{
 	}
 
 	getProjectData(){
-		let url="http://localhost:3002/Projects";
+		let url="http://localhost:3003/Projects";
 		ajax.get(url).end((error,result)=>{
 			if(result){
 				this.setState({project:result.body})
@@ -96,7 +110,7 @@ export default class Popup extends React.Component{
 	}
 	getChannelData(name){
 		console.log(name);
-		let url="http://localhost:3002/Projects/"+name;
+		let url="http://localhost:3003/Projects/"+name;
 		ajax.get(url).end((error,result)=>{
 			if(result){
 				this.setState({channel:result.body.channels})
@@ -155,19 +169,6 @@ export default class Popup extends React.Component{
 		}
 		return(
 			<div>
-			<Card>
-    <CardHeader
-      title="TITLE ADD"
-      subtitle="click the icon"
-    
-    />
-    <CardText>
-      <FloatingActionButton onTouchTap={this.handleOpen}>
-      <ContentAdd />
-    </FloatingActionButton>
-    </CardText>
-    
-  </Card>
 			<Dialog title="Filter By" modal={false} open={this.state.status} onRequestClose={this.handleClose}>
 			<SelectField floatingLabelText="select" value={this.state.filtertype} onChange={this.handleChange} style={{width:"300px"}}>
 			<MenuItem value={1} primaryText="Projects"/>

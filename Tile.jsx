@@ -9,18 +9,36 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import IconButton from 'material-ui/IconButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ConfigureTile from './ConfigureTile.jsx';
+import CircularProgress from 'material-ui/CircularProgress';
+import Popup from './popup.jsx';
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default class Tile extends React.Component{
 	
 	constructor(props){
 		super(props);
+		ajax.get('http://localhost:3002/Configured/'+this.props.tileid)
+            .end(function(err,response){
+                if(err)
+                    console.log("Get error ",err);
+                else
+                    {
+                     console.log("setting the layout")
+                     this.setState({configured:response.body.value});
+                     console.log("got this layout:", response.body.Tile);
+                    }
+               }.bind(this));
 		this.state={
 			msgList:[],
 			div:null,
 			title:"",
-			subtitle:""
+			subtitle:"",
+			configured:null,
+			dialog:null
+			
 		}
-		
+		this.handleDialog=this.handleDialog.bind(this);
 	}
 
 	ajaxCall(){
@@ -43,6 +61,11 @@ export default class Tile extends React.Component{
 		})
 	}
 
+	handleDialog(){
+		console.log("inside handle dialog");
+		this.setState({dialog:<Popup status={true} />})
+	}
+
 	componentDidMount() {
 		this.ajaxCall();
 	    
@@ -55,14 +78,21 @@ export default class Tile extends React.Component{
 	// 	// 	title:this.state.msgList.
 	// 	// })
 	// }
+	calll(){
+		console.log("in calll");
+		this.props.passfunc();
+	}
 createAutoplayMessages(){
+
 	if(this.props.tileid==="t1"){
+		
+
 		this.setState({div:<div><CardHeader title="TITLE ADD" subtitle="click the icon"/>
         <CardText>
-        <center><FloatingActionButton onTouchTap={this.handleOpen}>
-        <ContentAdd />
+        <center><FloatingActionButton onClick={this.calll.bind(this)}>
+        <ContentAdd  />
         </FloatingActionButton></center></CardText></div>
-	})
+	});
 	}
 	else{
             this.setState({div:<AutoPlaySwipeableViews>
@@ -83,12 +113,31 @@ createAutoplayMessages(){
 		// this.state.msgList.map(function(i){
 		// 	console.log("aaa"+i);
 		// })
-		return(
-	
+		if(this.state.configured===null)
+		{
+				return (<center><CircularProgress size={10} thickness={3} /></center>);
+		}
+		else{
+			if(this.state.configured)
+				{
+					return(
 				<Card style={{height: '100%',overflow:"hidden"}}>
 					{this.state.div}
-				</Card>
-         
-			);
-	}
+				</Card>	);
+				}	
+			else{
+				return(
+					<Card style={{height: '100%',overflow:"hidden"}}>
+					<CardHeader title="Configure" subtitle="click the icon"/>
+        <CardText>
+        <center><FloatingActionButton onClick={this.handleDialog}>
+          <SettingsIcon  />
+          {this.state.dialog}
+        </FloatingActionButton></center></CardText>
+				</Card>);
+				}
+			}
+				
+			
+		}
 }

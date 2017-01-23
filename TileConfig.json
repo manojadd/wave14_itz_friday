@@ -3,29 +3,56 @@
     "id": "cl",
     "Tile": [
       {
-        "w": 3,
-        "h": 2,
-        "x": 2,
-        "y": 7,
+        "w": 2,
+        "h": 3,
+        "x": 0,
+        "y": 0,
         "i": "t1",
         "moved": false,
         "static": false
       },
       {
-        "w": 4,
-        "h": 7,
-        "x": 0,
+        "w": 3,
+        "h": 3,
+        "x": 2,
         "y": 0,
         "i": "t2",
         "moved": false,
         "static": false
       },
       {
-        "w": 4,
-        "h": 4,
-        "x": 6,
-        "y": 0,
+        "w": 3,
+        "h": 3,
+        "x": 3,
+        "y": 3,
         "i": "t3",
+        "moved": false,
+        "static": false
+      },
+      {
+        "w": 3,
+        "h": 3,
+        "x": 0,
+        "y": 3,
+        "i": "t4",
+        "moved": false,
+        "static": false
+      },
+      {
+        "w": 2,
+        "h": 3,
+        "x": 5,
+        "y": 0,
+        "i": "t5",
+        "moved": false,
+        "static": false
+      },
+      {
+        "w": 3,
+        "h": 3,
+        "x": 7,
+        "y": 0,
+        "i": "t6",
         "moved": false,
         "static": false
       }
